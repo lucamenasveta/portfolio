@@ -1,0 +1,203 @@
+/* ==========================================================
+   Portfolio stylesheet
+   Author: Luca Menasveta
+   Course: GIT 215 - Module 6 Code-Along
+   ----------------------------------------------------------
+   COLOR PALETTE
+   --ink        #1b1f24   near-black, header and footer
+   --slate      #33414f   navigation bar
+   --accent     #c2703a   warm terracotta, links and rules
+   --paper      #faf8f5   page background
+   --card       #ffffff   content surfaces
+   --muted      #5d6773   secondary text
+   ----------------------------------------------------------
+   Mobile-first: base rules target small screens.
+   Two breakpoints widen the layout at 600px and 900px.
+   ========================================================== */
+
+:root {
+  --ink: #1b1f24;
+  --slate: #33414f;
+  --accent: #c2703a;
+  --paper: #faf8f5;
+  --card: #ffffff;
+  --muted: #5d6773;
+  --gap: 16px;
+}
+
+/* ---------- reset ---------- */
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  padding: 0 var(--gap);
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--paper);
+
+  /* mobile-first: one column, everything stacked */
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "header"
+    "nav"
+    "main"
+    "footer";
+  gap: var(--gap);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* ---------- regions ---------- */
+header {
+  grid-area: header;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 24px var(--gap);
+  border-radius: 6px;
+}
+
+header h1 {
+  margin: 0 0 4px;
+  font-size: 1.6rem;
+  letter-spacing: 0.01em;
+}
+
+header p {
+  margin: 0;
+  color: #c9d1d9;
+  font-size: 0.95rem;
+}
+
+nav {
+  grid-area: nav;
+  background: var(--slate);
+  border-radius: 6px;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 8px;
+
+  /* mobile-first: nav links stack vertically */
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+nav a {
+  display: block;
+  padding: 10px 12px;
+  color: #eef2f6;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 0.95rem;
+}
+
+nav a:hover,
+nav a:focus { background: rgba(255, 255, 255, 0.12); }
+
+nav a.current {
+  background: var(--accent);
+  color: #fff;
+}
+
+main {
+  grid-area: main;
+}
+
+main section {
+  background: var(--card);
+  border: 1px solid #e6e1da;
+  border-radius: 6px;
+  padding: 20px var(--gap);
+  margin-bottom: var(--gap);
+}
+
+main h2 {
+  margin-top: 0;
+  font-size: 1.3rem;
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 6px;
+}
+
+main h3 {
+  margin-bottom: 4px;
+  font-size: 1.05rem;
+}
+
+main ul, main ol { padding-left: 20px; }
+
+main li { margin-bottom: 6px; }
+
+a { color: var(--accent); }
+
+.meta {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-top: 0;
+}
+
+/* card row used on the homepage */
+.card-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap);
+}
+
+.card-row article {
+  flex: 1 1 100%;          /* mobile-first: one card per row */
+  background: var(--card);
+  border: 1px solid #e6e1da;
+  border-radius: 6px;
+  padding: 16px;
+}
+
+footer {
+  grid-area: footer;
+  background: var(--ink);
+  color: #c9d1d9;
+  padding: 16px var(--gap);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  margin-bottom: var(--gap);
+}
+
+footer p { margin: 0; }
+
+/* ==========================================================
+   BREAKPOINT 1 - 600px and up (large phone, small tablet)
+   Navigation goes horizontal, cards sit two across.
+   ========================================================== */
+@media (min-width: 600px) {
+  body { font-size: 18px; }
+
+  nav ul {
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+  }
+
+  header h1 { font-size: 2rem; }
+
+  .card-row article { flex: 1 1 calc(50% - var(--gap)); }
+}
+
+/* ==========================================================
+   BREAKPOINT 2 - 900px and up (tablet landscape, desktop)
+   Roomier type and three cards across.
+   ========================================================== */
+@media (min-width: 900px) {
+  header { padding: 32px 24px; }
+
+  header h1 { font-size: 2.3rem; }
+
+  main section { padding: 24px 28px; }
+
+  .card-row article { flex: 1 1 calc(33.333% - var(--gap)); }
+}
